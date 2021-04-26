@@ -27,14 +27,17 @@ public class WebSecurity extends WebSecurityConfigurerAdapter {
 	protected void configure(HttpSecurity http) throws Exception {
 		http
 		.authorizeRequests()
-			.anyRequest().authenticated()
+			.antMatchers("/home/**")
+				.permitAll()
+			.anyRequest()
+			.authenticated()
 		.and()
 			.formLogin(form -> form
 	            .loginPage("/login")
 	            .defaultSuccessUrl("/usuario/pedido", true)
 	            .permitAll()
 	        )
-			.logout(logout -> logout.logoutUrl("/logout"))
+			.logout(logout -> logout.logoutUrl("/logout").logoutSuccessUrl("/home"))
 				 .csrf().disable();
 	}
 	
