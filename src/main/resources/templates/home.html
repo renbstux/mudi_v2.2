@@ -1,5 +1,7 @@
 <html>
-	<head th:replace="~{base :: head}"></head>
+	<head th:replace="~{base :: head}">
+	<meta charset="UTF-8" />
+	</head>
 	<body>	
 		<div th:replace="~{base :: logo}"></div>
 
@@ -7,12 +9,7 @@
 			<div th:replace="~{base :: titulo('Últimos Pedidos')}"></div>
 		
 			<nav class="navbar navbar-expand navbar-light bg-light d-flex justify-content-between mb-3">
-				<div class="navbar-nav">
-					<a th:classappend="${status} == null ? 'active'" class="nav-item nav-link" href="/home">Todos</a>
-					<a th:classappend="${status} == 'aguardando' ? 'active'" class="nav-item nav-link" href="/home/aguardando">Aguardando</a>
-					<a th:classappend="${status} == 'aprovado' ? 'active'" class="nav-item nav-link" href="/home/aprovado">Aprovado</a>
-					<a th:classappend="${status} == 'entregue' ? 'active'" class="nav-item nav-link" href="/home/entregue">Entregue</a>
-				</div>
+				
 				<a href="/pedido/formulario"><button class="btn btn-outline-secondary my-2 my-sm-0">Novo</button></a>
 			</nav>
 		
