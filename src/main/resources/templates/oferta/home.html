@@ -1,45 +1,80 @@
 <html>
-	<head th:replace="~{base :: head}">
-	<meta charset="UTF-8" />
-	</head>
-	<body>	
-		<div th:replace="~{base :: logo}"></div>
+<head th:replace="~{base :: head}">
+<meta charset="UTF-8" />
+</head>
+<body onload="onLoad()">
+	<div th:replace="~{base :: logo}"></div>
 
-		<div class="container">
-			<div th:replace="~{base :: titulo('Últimos Pedidos')}"></div>
-		
-			<nav class="navbar navbar-expand navbar-light bg-light d-flex justify-content-between mb-3">
-				
-				<a href="/pedido/formulario"><button class="btn btn-outline-secondary my-2 my-sm-0">Novo</button></a>
-			</nav>
-		
-			<div class="card mb-3" th:each="pedido : ${pedidos}">
-					<div class="card-header alert-dark" th:text="${pedido.nomeProduto}">Nome do Produto</div>
-			
-				<div class="card-body">
-					<div class="row">
-						<div class="col-12 col-sm-8 mb-3">
-							<div class="row ">
-								<div class="col-md-5">Valor: <span th:if="${pedido.valorNegociado} != null" th:text="${'R$ ' + #numbers.formatDecimal(pedido.valorNegociado, 3, 'POINT', 2, 'COMMA')}">200,99</span></div>
-								<div class="col-md-6">Data da entrega: <span th:text="${#temporals.format(pedido.dataDaEntrega, 'dd/MM/yyyy')}">10/02/2020</span></div>
-							</div>
-							
-							<div>Produto</div> 
-							<div> <input class="form-control" th:value="${pedido.urlProduto}" value="url do produto" /></div>
-							 
-							<div>Descrição</div>
-							<div>
-								<textarea class="form-control" th:text="${pedido.descricao}">descrição do pedido</textarea>
-							</div>
+	<div class="container" id="ofertas">
+		<div th:replace="~{base :: titulo('Faça Sua Oferta')}"></div>
+
+		<nav
+			class="navbar navbar-expand navbar-light bg-light d-flex justify-content-between mb-3">
+
+			<a href="/pedido/formulario"><button
+					class="btn btn-outline-secondary my-2 my-sm-0">Novo</button></a>
+		</nav>
+
+		<div class="card mb-3" v-for="pedido in pedidos">
+			<div class="card-header alert-dark">{{pedido.nomeProduto}}</div>
+
+			<div class="card-body">
+				<div class="row">
+					<div class="col-12 col-sm-8 mb-3">
+						<div class="row ">
+							<div class="col-md-5">Valor: <input /></div>
+							<div class="col-md-7">Data da entrega: <input /></div>
 						</div>
-						<div class="col-12 col-sm-4">
-							<div>
-								<img class="img-thumbnail" th:src="${pedido.urlImagem}" src="" />
-							</div>
+
+						<div>Produto</div>
+						<div>
+							<a v-bind:href="pedido.urlProduto">{{pedido.nomeProduto}}</a>
+						</div>
+
+						<div>Descrição</div>
+						<div>
+							<textarea class="form-control">{{pedido.descricao}}</textarea>
+						</div>
+					</div>
+					<div class="col-12 col-sm-4">
+						<div>
+							<img class="img-thumbnail" v-bind:src="pedido.urlImagem" />
 						</div>
 					</div>
 				</div>
 			</div>
 		</div>
-	</body>
+	</div>
+	<script>
+			function onLoad() {
+				var app = new Vue({
+  					el: '#ofertas',
+  					data: {
+    					pedidos: [
+    					{
+        					"id" : 4,
+        					"nomeProduto" : "Wireless Earbuds TaoTronics",
+        					"valorNegociado" : null,
+        					"dataDaEntrega" : null,
+        					"urlProduto" : "https://www.amazon.com/TaoTronics-SoundLiberty-79-Technology-Waterproof/dp/B08397W1F7/ref=gbps_img_m-9_475e_ff9c5f1b?smid=AAJVIARPZY8SB&pf_rd_p=5d86def2-ec10-4364-9008-8fbccf30475e&pf_rd_s=merchandised-search-9&pf_rd_t=101&pf_rd_i=15529609011&pf_rd_m=ATVPDKIKX0DER&pf_rd_r=WD9HGMRTX91GNP8DKA4Z",
+        					"urlImagem" : "https://images-na.ssl-images-amazon.com/images/I/51SgO0fSIuL._AC_SL1300_.jpg",
+        					"descricao" : "descrição Wireless Earbuds TaoTronics",
+        					"status" : "AGUARDANDO"
+    					},
+    					{
+    						"id" : 2,
+    						"nomeProduto" : "Controle Sem Fio Xbox + Cabo USB",
+    						"valorNegociado" : null,
+    						"dataDaEntrega" : null,
+    						"urlProduto" : "https://www.amazon.com.br/dp/B08ZBY9ZBB/ref=s9_acsd_al_bw_c2_x_1_i?pf_rd_m=A3RN7G7QC5MWSZ&pf_rd_s=merchandised-search-5&pf_rd_r=838YQGJYFFNMFX0N6840&pf_rd_t=101&pf_rd_p=fc1c2ef1-298f-4f8d-85f0-50b15a7b42ef&pf_rd_i=7791985011",
+    						"urlImagem" : "https://images-na.ssl-images-amazon.com/images/I/71ySRL7ReuL._AC_SL1500_.jpg",
+    						"status" : "AGUARDANDO"
+    						}]
+ 	 				}
+					});
+			}
+			
+		</script>
+	<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</body>
 </html>
