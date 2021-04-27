@@ -16,7 +16,7 @@ import br.com.renbstux.mvc.mudi.model.StatusPedido;
 public interface PedidoRepository extends JpaRepository<Pedido, Long>{
 	
 	@Cacheable("status")
-	List<Pedido> findByStatus(StatusPedido aguardando, Pageable sort);
+	List<Pedido> findByStatus(StatusPedido status, Pageable sort);
 	
 	@Query("select p from Pedido p join p.user u where u.username = :username")
 	List<Pedido> findAllByUser(@Param("username")String username);

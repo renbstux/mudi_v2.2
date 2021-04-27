@@ -16,7 +16,7 @@ import br.com.renbstux.mvc.mudi.repository.PedidoRepository;
 @RestController
 @RequestMapping("/api/pedidos")
 public class PedidosRest {
-	
+
 	@Autowired
 	private PedidoRepository pedidoRepository;
 	
@@ -27,5 +27,4 @@ public class PedidosRest {
 		
 		return pedidoRepository.findByStatus(StatusPedido.AGUARDANDO, paginacao);
 	}
-
 }
