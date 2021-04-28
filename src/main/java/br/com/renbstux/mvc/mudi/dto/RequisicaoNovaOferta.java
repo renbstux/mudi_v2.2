@@ -4,16 +4,29 @@ import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
+
 import br.com.renbstux.mvc.mudi.model.Oferta;
 
 public class RequisicaoNovaOferta {
 	
+	private static final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+	
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long pedidoId;
+	@NotNull
+	@Pattern(regexp = "^\\d+(\\.\\d+{2})?$") //^começar com \\d digito + numeros \\ escapar usando contra-barra . e espera dois digitos depois do ponto, ?informa que esta dentro do parenteses pode ou não vir e $ informa o fim
 	private String valor;
+	
+	@NotNull
+	@Pattern(regexp = "^\\d{2}/\\d{2}/\\d{4}$")
 	private String dataDaEntrega;
 	private String comentario;
-	
-	private static final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 	
 	public Long getPedidoId() {
 		return pedidoId;
