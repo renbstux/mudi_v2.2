@@ -2,7 +2,9 @@ package br.com.renbstux.mvc.mudi.model;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
@@ -11,6 +13,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 
 @Entity
 public class Pedido {
@@ -32,6 +35,8 @@ public class Pedido {
 	@ManyToOne(fetch = FetchType.LAZY)
 	private User user;
 	
+	@OneToMany(cascade = CascadeType.ALL, mappedBy = "pedido", fetch = FetchType.LAZY)
+	private List<Oferta> oferta;
 
 	public Pedido(String nomeProduto, BigDecimal valorNegociado, LocalDate dataDaEntrega, String urlProduto,
 			String urlImagem, String descricao) {
@@ -96,6 +101,14 @@ public class Pedido {
 
 	public void setUser(User user) {
 		this.user = user;
+	}
+	
+	public List<Oferta> getOferta() {
+		return oferta;
+	}
+
+	public void setOferta(List<Oferta> oferta) {
+		this.oferta = oferta;
 	}
 
 }
