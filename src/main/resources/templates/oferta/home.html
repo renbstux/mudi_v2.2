@@ -50,31 +50,18 @@
 				var app = new Vue({
   					el: '#ofertas',
   					data: {
-    					pedidos: [
-    					{
-        					"id" : 4,
-        					"nomeProduto" : "Wireless Earbuds TaoTronics",
-        					"valorNegociado" : null,
-        					"dataDaEntrega" : null,
-        					"urlProduto" : "https://www.amazon.com/TaoTronics-SoundLiberty-79-Technology-Waterproof/dp/B08397W1F7/ref=gbps_img_m-9_475e_ff9c5f1b?smid=AAJVIARPZY8SB&pf_rd_p=5d86def2-ec10-4364-9008-8fbccf30475e&pf_rd_s=merchandised-search-9&pf_rd_t=101&pf_rd_i=15529609011&pf_rd_m=ATVPDKIKX0DER&pf_rd_r=WD9HGMRTX91GNP8DKA4Z",
-        					"urlImagem" : "https://images-na.ssl-images-amazon.com/images/I/51SgO0fSIuL._AC_SL1300_.jpg",
-        					"descricao" : "descrição Wireless Earbuds TaoTronics",
-        					"status" : "AGUARDANDO"
-    					},
-    					{
-    						"id" : 2,
-    						"nomeProduto" : "Controle Sem Fio Xbox + Cabo USB",
-    						"valorNegociado" : null,
-    						"dataDaEntrega" : null,
-    						"urlProduto" : "https://www.amazon.com.br/dp/B08ZBY9ZBB/ref=s9_acsd_al_bw_c2_x_1_i?pf_rd_m=A3RN7G7QC5MWSZ&pf_rd_s=merchandised-search-5&pf_rd_r=838YQGJYFFNMFX0N6840&pf_rd_t=101&pf_rd_p=fc1c2ef1-298f-4f8d-85f0-50b15a7b42ef&pf_rd_i=7791985011",
-    						"urlImagem" : "https://images-na.ssl-images-amazon.com/images/I/71ySRL7ReuL._AC_SL1500_.jpg",
-    						"status" : "AGUARDANDO"
-    						}]
+    					pedidos: []
+ 	 				},
+ 	 				mounted () {
+ 	 					axios
+      						.get('http://localhost:8080/api/pedidos/aguardando')
+      						.then(response => (this.pedidos = response.data))
  	 				}
 					});
 			}
 			
 		</script>
 	<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+	<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 </body>
 </html>
